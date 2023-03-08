@@ -15,7 +15,7 @@ struct ProfileView: View {
         NavigationView() {
             ZStack {
               
-                Color(eggShell)
+                Color("colors")
                     .edgesIgnoringSafeArea(.all)
                 
                 VStack {
@@ -38,7 +38,7 @@ struct ProfileView: View {
                         .bold()
                         .offset(y: -265)
                         .offset(x: 50)
-                        .foregroundColor(.black)
+                        .foregroundColor(.primary)
                     
                 }
             }

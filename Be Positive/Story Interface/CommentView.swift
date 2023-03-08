@@ -20,14 +20,14 @@ struct CommentView: View {
         ZStack {
             NavigationView {
                 ZStack {
-                    Color.black
+                    Color("colors")
                         .ignoresSafeArea(.all)
                     VStack {
                         Spacer()
                         TextField("Say something nice", text: $comment)
                             .padding()
-                            .background(Color.white.opacity(0.3).cornerRadius(10))
-                            .foregroundColor(.white)
+                            .background(Color.primary.opacity(0.3).cornerRadius(10))
+                            .foregroundColor(.primary)
                             .font(.headline)
                         
 //                        Takes you to the next story
@@ -39,7 +39,7 @@ struct CommentView: View {
                             Text("Comment".uppercased())
                                 .padding()
                                 .frame(maxWidth: .infinity)
-                                .background(Color.blue.opacity(0.8).cornerRadius(10))
+                                .background(Color.black.opacity(0.8).cornerRadius(10))
                                 .foregroundColor(.white)
                                 .font(.headline)
                         }
@@ -49,35 +49,10 @@ struct CommentView: View {
                         }
                     }
                     .padding()
-                    .navigationTitle("Be Positive!!")
+                 
                     
                 }
             }
         }
     }
 }
-
-
-//struct MiniAddCommentView: View {
-//
-//    @State var commentTxt: String = ""
-//    @State var showSubTextField = false
-//
-//    var body: some View {
-//        HStack(spacing: 10) {
-//
-//            TextField("Add a comment", text: $commentTxt)
-//                .overlay(RoundedRectangle(cornerRadius: 5))
-//
-//            Text("🤎")
-//            Text("🙌🏼")
-//
-//        }
-//    }
-//}
-
-//struct CommentView_Previews: PreviewProvider {
-//    static var previews: some View {
-//     CommentView()
-//    }
-//}

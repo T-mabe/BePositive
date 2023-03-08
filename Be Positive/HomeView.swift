@@ -9,14 +9,17 @@ import SwiftUI
 
 struct HomeView: View {
     
-    var eggShell = #colorLiteral(red: 0.9302913547, green: 0.9253246188, blue: 0.916793704, alpha: 1)
     @State private var showStory = false
     @State var tapped = false
     @State private var isAnimating = false
     @State var buttonText = ""
     @FocusState var isInputActive: Bool
-
-   
+    
+//    Comment Variables
+    @State var showComment = false
+    @State var show = false
+    @State var storyImage = "Sebby"
+    
     var body: some View {
         
         ZStack {
@@ -31,29 +34,21 @@ struct HomeView: View {
                     
                     ZStack {
                         
-//                        Image("EmptyTeeV")
-//                            .resizable()
-//                            .scaledToFit()
-                        
                         Image("Sebby")
                             .resizable()
                             .scaledToFill()
                             .frame(width: 375, height: 540 )
                             .clipShape(RoundedRectangle(cornerRadius: 15))
-//                            .offset(y: -76).offset(x: -25)
                             .onTapGesture {
                                 withAnimation {
                                     tapped.toggle()
                                 }
                             }.animation(.default, value: tapped)
+                        
                         Spacer()
-                        
-                        
-                        
                         
                     }  .frame(width: 250)
                         .padding(.top, 180)
-                    
                     
                     VStack {
                         //                    Profile Icon in the top right
@@ -70,49 +65,63 @@ struct HomeView: View {
                             
                             Spacer()
                             
-                        NavigationLink {
-                            SettingsView()
-                        } label: {
-                            Image(systemName: "line.3.horizontal")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 40, height: 40)
-                                .foregroundColor(.primary)
-                                .padding()
+                            NavigationLink {
+                                SettingsView()
+                            } label: {
+                                Image(systemName: "line.3.horizontal")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 40, height: 40)
+                                    .foregroundColor(.primary)
+                                    .padding()
+                            }
                         }
-                    }
                         
                         //                        Heading Text
-                        Text("Be")
+                        Text("Spread")
                             .bold()
-                            .font(.system(size: 60))
-                            .multilineTextAlignment(.center)
-//                            .padding(., 45)
+                            .font(.system(size: 55))
+                            .multilineTextAlignment(.leading)
+                        //                            .padding(., 45)
                             .foregroundColor(.primary)
                         
-                        Text("Positive")
+                        
+                        Text("Positivity")
                             .bold()
                             .foregroundColor(.red)
-                            .font(.system(size: 60))
-                            
+                            .font(.system(size: 55))
+                        
                         
                         //                        Camera Icon with spacers to position
                         Spacer()
                         
                         HStack {
-                            TextField("Leave a comment", text: $buttonText)
-                                .foregroundColor(.primary)
-                                .font(.system(size: 23))
-                                .textFieldStyle(.automatic)
-//                                .multilineTextAlignment(.center)
-//                                .font(.headline)
-                                .padding()
-                                .focused($isInputActive)
+                            
+                            Button {
+                                showComment.toggle()
+                            } label: {
+                                Text("Leave a comment")
+                                    .foregroundColor(.gray)
+                                    .font(.system(size: 23))
+                                    .textFieldStyle(.automatic)
+                                    .padding()
+                            }.sheet(isPresented: $showComment) {
+                                CommentView(showComment: $showComment, storyImage: $storyImage)
+                            }
+                           
+                            //                            TextField("Leave a comment", text: $buttonText)
+                            //                                .foregroundColor(.primary)
+                            //                                .font(.system(size: 23))
+                            //                                .textFieldStyle(.automatic)
+                            ////                                .multilineTextAlignment(.center)
+                            ////                                .font(.headline)
+                            //                                .padding()
+                            //                                .focused($isInputActive)
                             
                             Spacer()
                             
                             NavigationLink {
-                               ProfileView()
+                                ProfileView()
                             } label: {
                                 Image(systemName: "camera")
                                     .resizable()
@@ -127,7 +136,7 @@ struct HomeView: View {
                     //                    This needs to be cleaned up
                     ZStack {
                         if !tapped {
-        
+                            
                         } else {
                             StoryView(storyImage: "Sebby")
                                 .background(Color.gray)
